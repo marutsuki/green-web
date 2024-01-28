@@ -1,5 +1,7 @@
 const THOUSANDS_FACTOR = 1000;
 
+const PERCENTAGE_FACTOR = 100;
+
 const DECIMAL_POINTS = 3;
 
 export function formatDecimal(value: number): number {
@@ -9,4 +11,8 @@ export function formatDecimal(value: number): number {
 
 export function formatThousands(value: number): number {
     return Math.round(value / THOUSANDS_FACTOR);
+}
+
+export function formatPercentage(value: number): number {
+    return Math.round(value * PERCENTAGE_FACTOR);
 }

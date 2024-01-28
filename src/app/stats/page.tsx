@@ -1,7 +1,9 @@
+import ComparisonDisplay from "@/components/stats/ComparisonDisplay";
 import StatsDisplay from "@/components/stats/StatsDisplay";
 import { Bytes, CO2, Renewable } from "@/components/symbols";
 import WebsiteStats from "@/model/WebsiteStats";
-import { formatDecimal, formatThousands } from "@/util/format";
+import { formatDecimal, formatPercentage, formatThousands } from "@/util/format";
+import { Doughnut } from "react-chartjs-2";
 
 async function getWebsiteStats(url: string): Promise<WebsiteStats> {
     /** 
@@ -39,6 +41,15 @@ export default async function Page({ searchParams }: { searchParams: Record<stri
     const stats = await getWebsiteStats(searchParams.url as string);
 
     return <main className="grid grid-cols-2 place-items-center h-full">
-        <StatsDisplay { ...stats } />
+        <div>
+            <h2 className="text-2xl mb-4 text-end">On every page load</h2>
+            <StatsDisplay { ...stats } />
+        </div>
+        
+        <div className="flex flex-col items-center">
+            <h2 className="text-2xl mb-4">This page is cleaner than <b className="text-accent">{formatPercentage(stats.cleanerThan) + "%"}</b> other websites.</h2>
+            <ComparisonDisplay label="Cleaner Than" proportion={stats.cleanerThan}/>
+            
+        </div>
     </main>
 }
