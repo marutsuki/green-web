@@ -14,12 +14,9 @@ export default function Header(): React.ReactNode {
         if (url === undefined) {
             throw new Error();
         }
-        const searchParams = new URLSearchParams({
-            url
-        });
-        router.push("/stats?" + searchParams);
+        router.push("/stats/" + encodeURIComponent(url));
     }
-    
+
     const toHomePage = () => {
         router.push("/");
     }
