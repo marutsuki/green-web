@@ -1,4 +1,7 @@
+import StatsDisplay from "@/components/stats/StatsDisplay";
+import { Bytes, CO2, Renewable } from "@/components/symbols";
 import WebsiteStats from "@/model/WebsiteStats";
+import { formatDecimal, formatThousands } from "@/util/format";
 
 async function getWebsiteStats(url: string): Promise<WebsiteStats> {
     /** 
@@ -27,6 +30,7 @@ async function getWebsiteStats(url: string): Promise<WebsiteStats> {
         }
     });
 }
+
 export default async function Page({ searchParams }: { searchParams: Record<string, string | string[] | undefined>}) {
     if (searchParams.url === undefined && !Array.isArray(searchParams.url)) {
         throw new Error("Invalid target url")
@@ -34,7 +38,7 @@ export default async function Page({ searchParams }: { searchParams: Record<stri
 
     const stats = await getWebsiteStats(searchParams.url as string);
 
-    return <main>
-        
+    return <main className="grid grid-cols-2 place-items-center h-full">
+        <StatsDisplay { ...stats } />
     </main>
 }
