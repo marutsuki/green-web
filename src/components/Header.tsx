@@ -19,9 +19,11 @@ export default function Header(): React.ReactNode {
         });
         router.push("/stats?" + searchParams);
     }
+    
     const toHomePage = () => {
         router.push("/");
     }
+
     return <header>
         <div className="relative navbar bg-base-100">
             <div className="flex-none">
