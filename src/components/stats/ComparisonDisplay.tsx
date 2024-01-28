@@ -24,7 +24,6 @@ export default function ComparisonDisplay({ label, proportion }: ComparisonDispl
                     "transparent"
                 ],
                 borderWidth: 0,
-                hoverOffset: 5
             }]
         }}/>
     </div>
