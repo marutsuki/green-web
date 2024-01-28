@@ -25,8 +25,9 @@ export default async function Page({ searchParams }: { searchParams: Record<stri
 
     const stats = await getWebsiteStats(searchParams.url as string);
 
-    return <main className="flex flex-col p-8">
+    return <main className="flex flex-col p-8 flex-1">
         <div className="grid place-items-center m-24">
+            <h1 className="text-2xl">Green Rating</h1>
             <Rating rating={stats.cleanerThan * MAX_RATING_VALUE}/>
         </div>
         <div className="divider">Overview</div>
