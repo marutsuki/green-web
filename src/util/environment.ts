@@ -1,0 +1,1 @@
+export const WEBSITE_CARBON_API_ENDPOINT = "https://api.websitecarbon.com";
