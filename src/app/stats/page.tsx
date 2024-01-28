@@ -10,8 +10,11 @@ async function getWebsiteStats(url: string): Promise<WebsiteStats> {
     const searchParams = new URLSearchParams({
         url
     });
+    console.log(WEBSITE_CARBON_API_ENDPOINT.concat("/site?" + searchParams));
     const res = await fetch(WEBSITE_CARBON_API_ENDPOINT.concat("/site?" + searchParams));
     const data = await res.json();
+    console.info(`Received payload from ${WEBSITE_CARBON_API_ENDPOINT}.`);
+    console.info("Data:", data);
     return data as WebsiteStats;
 }
 
