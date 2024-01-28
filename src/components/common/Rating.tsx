@@ -7,7 +7,7 @@ export type RatingProps = {
 }
 
 export default function Rating({ rating }: RatingProps): React.ReactNode {
-    const notch =  getAdjustedRating(rating);
+    const notch = getAdjustedRating(rating) - 1;
     
     return <div className="rating rating-half">
         {
