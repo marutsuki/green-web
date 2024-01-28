@@ -7,24 +7,18 @@ import { WEBSITE_CARBON_API_ENDPOINT } from "@/util/environment";
 import { formatPercentage } from "@/util/format";
 
 async function getWebsiteStats(url: string): Promise<WebsiteStats> {
-    const searchParams = new URLSearchParams({
-        url
-    });
-    console.log(WEBSITE_CARBON_API_ENDPOINT.concat("/site?" + searchParams));
-    const res = await fetch(WEBSITE_CARBON_API_ENDPOINT.concat("/site?" + searchParams));
+    const endpoint = WEBSITE_CARBON_API_ENDPOINT.concat("/site?url=" + url);
+    console.info("Sending request for data to", endpoint)
+    const res = await fetch(endpoint);
     const data = await res.json();
-    console.info(`Received payload from ${WEBSITE_CARBON_API_ENDPOINT}.`);
+    console.info("Received payload from", endpoint);
     console.debug("Data:", data);
     return data as WebsiteStats;
 }
 
-export default async function Page({ searchParams }: { searchParams: Record<string, string | string[] | undefined>}) {
-    if (searchParams.url === undefined && !Array.isArray(searchParams.url)) {
-        throw new Error("Invalid target url")
-    }
-
-    const stats = await getWebsiteStats(searchParams.url as string);
-
+export default async function Page({ params }: { params: { url : string } }) {
+    const stats = await getWebsiteStats(decodeURIComponent(params.url));
+    
     return <main className="flex flex-col p-8 flex-1">
         <div className="grid place-items-center m-24">
             <h1 className="text-2xl">Green Rating</h1>
