@@ -1,5 +1,4 @@
-import WebsiteStats from "@/util/WebsiteStats";
-import { WEBSITE_CARBON_API_ENDPOINT } from "@/util/environment"
+import WebsiteStats from "@/model/WebsiteStats";
 
 async function getWebsiteStats(url: string): Promise<WebsiteStats> {
     /** 
